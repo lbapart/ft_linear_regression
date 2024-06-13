@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from joblib import dump
+from train import MyLinearRegression
 
 data = pd.read_csv('data.csv')
 print(data)
@@ -14,9 +15,6 @@ x = pd.DataFrame(data['km'])
 y = pd.DataFrame(data['price'])
 model.fit(x, y)
 print(model.predict([[100000]]))
-
-plt.plot(x, model.predict(x), color='red')
-print(model.score(x, y))
-plt.show()
-
-dump(model, 'model.joblib')
+myModel = MyLinearRegression()
+myModel.fit(x, y)
+print(myModel.predict(10000))
