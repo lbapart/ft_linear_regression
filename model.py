@@ -18,6 +18,15 @@ class MyLinearRegression:
         predictions = self.predict(self.independent)
         errors = predictions - self.dependent
         return np.mean(errors), np.mean(errors * self.independent)
+    
+    def calculate_precision(self):
+        predictions = self.predict(self.unnormalized_independent)
+        errors = predictions - self.dependent
+        mse = np.mean(np.square(errors))
+        rmse = np.sqrt(mse)
+        std_dev = np.std(self.dependent)
+        rsquared = 1 - (np.sum(np.square(errors)) / np.sum(np.square(self.dependent - np.mean(self.dependent))))
+        return mse, rmse, rsquared, std_dev
 
     def normilized_dataset(self):
         result = (self.independent - np.mean(self.independent)) / np.std(self.independent)
